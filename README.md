@@ -14,10 +14,10 @@
 
 ```text
 compressPPTX/
-├── src/compresspptx/   # packaged application code
-├── tests/              # lightweight regression tests
-├── compress_pptx.py    # compatibility wrapper
-└── pyproject.toml      # project metadata
+|-- src/compresspptx/   # packaged application code
+|-- tests/              # lightweight regression tests
+|-- compress_pptx.py    # compatibility wrapper
+`-- pyproject.toml      # project metadata
 ```
 
 ## Requirements
@@ -29,6 +29,12 @@ Install the package locally with:
 
 ```bash
 pip install -e .
+```
+
+This creates the command-line tool:
+
+```bash
+compress-pptx
 ```
 
 ## Usage
@@ -61,11 +67,19 @@ Run the basic regression tests with:
 python -m unittest discover -s tests
 ```
 
+GitHub Actions runs the same test suite automatically on pushes and pull requests.
+
+## Development Notes
+
+- The repository is intentionally source-only; no sample presentations are tracked.
+- `ffmpeg` is required for audio and video recompression paths.
+- The current tests focus on deterministic helper functions and packaging integrity.
+
 ## Repository Notes
 
 This repository intentionally excludes presentation files, generated outputs, private credentials, and local tooling files from version control.
 
 ## Author and License
 
-Author: Michael Beigl  
+Author: Michael Beigl
 License: CC-BY 4.0
