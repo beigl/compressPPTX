@@ -1,0 +1,23 @@
+# Local tooling
+.codex/
+.venv/
+__pycache__/
+*.py[cod]
+
+# Private data and credentials
+private/
+.env
+.env.*
+
+# Presentation source and generated artifacts
+input/
+output/
+output_*/
+*.pptx
+*.ppt
+*.ppsx
+*.potx
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
