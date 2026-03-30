@@ -10,23 +10,35 @@
 - strips selected document metadata
 - prunes unreachable package parts before rebuilding the archive
 
+## Project Layout
+
+```text
+compressPPTX/
+├── src/compresspptx/   # packaged application code
+├── tests/              # lightweight regression tests
+├── compress_pptx.py    # compatibility wrapper
+└── pyproject.toml      # project metadata
+```
+
 ## Requirements
 
 - Python 3.10 or newer
 - [ffmpeg](https://ffmpeg.org/) available in `PATH`
 
-Install the Python dependency with:
+Install the package locally with:
 
 ```bash
-pip install -r requirements.txt
+pip install -e .
 ```
 
 ## Usage
 
-Place source presentations in `input/` and run:
+Place source presentations in `input/` and run one of these commands:
 
 ```bash
 python compress_pptx.py --input-dir input --output-dir output
+python -m compresspptx --input-dir input --output-dir output
+compress-pptx --input-dir input --output-dir output
 ```
 
 Compression profiles:
@@ -38,12 +50,20 @@ Compression profiles:
 Example:
 
 ```bash
-python compress_pptx.py --compression-strength balanced
+python -m compresspptx --compression-strength balanced
+```
+
+## Tests
+
+Run the basic regression tests with:
+
+```bash
+python -m unittest discover -s tests
 ```
 
 ## Repository Notes
 
-This repository intentionally excludes presentation files, generated outputs, and private credentials from version control.
+This repository intentionally excludes presentation files, generated outputs, private credentials, and local tooling files from version control.
 
 ## Author and License
 
