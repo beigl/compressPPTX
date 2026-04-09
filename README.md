@@ -4,6 +4,14 @@
 
 Repository: https://github.com/beigl/compressPPTX
 
+## Download
+
+- Latest release page: https://github.com/beigl/compressPPTX/releases/latest
+- Windows build workflow: https://github.com/beigl/compressPPTX/actions/workflows/windows-exe.yml
+
+If the EXE is attached to a release, download `compressPPTX.exe` from the release page.
+If not, open the latest successful `Windows EXE` workflow run and download the artifact `compressPPTX-windows-exe`.
+
 ## Features
 
 - recompresses embedded JPEG, PNG, GIF, WAV, and MP4 media
