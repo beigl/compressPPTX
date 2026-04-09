@@ -20,7 +20,9 @@ from __future__ import annotations
 
 import argparse
 import os
+import shutil
 import subprocess
+import sys
 import tempfile
 import zipfile
 from collections import deque
@@ -81,10 +83,38 @@ def quote_path(path: Path) -> str:
     return str(path)
 
 
+def resolve_ffmpeg_binary() -> str:
+    """Locate ffmpeg from the frozen app folder, project tree, or PATH."""
+    candidates: list[Path] = []
+
+    if getattr(sys, "frozen", False):
+        candidates.append(Path(sys.executable).resolve().with_name("ffmpeg.exe"))
+        meipass = getattr(sys, "_MEIPASS", None)
+        if meipass:
+            candidates.append(Path(meipass) / "ffmpeg.exe")
+
+    module_dir = Path(__file__).resolve().parent
+    candidates.append(module_dir / "ffmpeg.exe")
+    candidates.append(Path.cwd() / "ffmpeg.exe")
+
+    for candidate in candidates:
+        if candidate.exists():
+            return str(candidate)
+
+    discovered = shutil.which("ffmpeg")
+    if discovered:
+        return discovered
+
+    raise FileNotFoundError(
+        "ffmpeg was not found. Install ffmpeg and add it to PATH, or place "
+        "ffmpeg.exe next to the executable."
+    )
+
+
 def run_ffmpeg(args: list[str]) -> None:
     """Run ffmpeg in quiet mode and surface failures as exceptions."""
     subprocess.run(
-        ["ffmpeg", "-y", "-loglevel", "error", *args],
+        [resolve_ffmpeg_binary(), "-y", "-loglevel", "error", *args],
         check=True,
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,

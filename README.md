@@ -2,6 +2,8 @@
 
 `compressPPTX` is a small Python utility for reducing the size of PowerPoint `.pptx` files by recompressing embedded media and removing unused package parts.
 
+Repository: https://github.com/beigl/compressPPTX
+
 ## Features
 
 - recompresses embedded JPEG, PNG, GIF, WAV, and MP4 media
@@ -37,6 +39,26 @@ This creates the command-line tool:
 compress-pptx
 ```
 
+## Windows EXE
+
+You can build a standalone Windows executable with:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\build_windows.ps1
+```
+
+The build output is:
+
+```text
+dist/compressPPTX.exe
+```
+
+Notes:
+
+- For JPEG/PNG/GIF-only presentations, the EXE works by itself.
+- For WAV/MP4 recompression, `ffmpeg.exe` must be available in `PATH` or placed next to `compressPPTX.exe`.
+- The repository can be shared as a GitHub link. For non-technical users, the better download path is a GitHub Release or Actions artifact containing the EXE.
+
 ## Usage
 
 Place source presentations in `input/` and run one of these commands:
@@ -59,6 +81,12 @@ Example:
 python -m compresspptx --compression-strength balanced
 ```
 
+For the Windows EXE:
+
+```powershell
+.\dist\compressPPTX.exe --input-dir input --output-dir output
+```
+
 ## Tests
 
 Run the basic regression tests with:
@@ -68,6 +96,19 @@ python -m unittest discover -s tests
 ```
 
 GitHub Actions runs the same test suite automatically on pushes and pull requests.
+
+## Downloading From GitHub
+
+If the repository is public, you can already share this link:
+
+- https://github.com/beigl/compressPPTX
+
+Others can then:
+
+- download the source as ZIP from GitHub
+- or, if you publish a Release, download the ready-made `compressPPTX.exe`
+
+Without a Release or uploaded artifact, users do not automatically get a downloadable EXE from the repository homepage alone.
 
 ## Development Notes
 
