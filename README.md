@@ -6,6 +6,7 @@ Repository: https://github.com/beigl/compressPPTX
 
 ## Download
 
+- Direct EXE download: https://github.com/beigl/compressPPTX/releases/latest/download/compressPPTX.exe
 - Latest release page: https://github.com/beigl/compressPPTX/releases/latest
 - Windows build workflow: https://github.com/beigl/compressPPTX/actions/workflows/windows-exe.yml
 
